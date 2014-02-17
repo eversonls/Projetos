@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+		<h:head>
+			<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+			<link href="#{facesContext.externalContext.requestContextPath}/theme.css" rel="stylesheet" type="text/css" />
+		</h:head>
+
+<h:body>
+			<ui:insert name="menu">
+				<h:form>
+				    <p:toolbar>  
+				        <p:toolbarGroup align="left">  
+				            <p:commandButton type="button" value="Representante" icon="ui-icon-person" />
+				            <p:menuButton value="Cliente">
+				            	<p:menuitem value="Novo Cliente" icon="ui-icon-person" action="#" update="@form"/>
+				            	<p:menuitem value="Manutenção" icon="ui-icon-pencil" action="#" update="@form"/>
+				            </p:menuButton>
+				  
+				            <p:commandButton type="button" value="Relatório" icon="ui-icon-folder-open"/>
+				            <p:commandButton type="button" value="Venda" icon="ui-icon-cart"/>
+				            <p:commandButton type="button" value="Produto" icon="ui-icon-star"/>  
+				  
+				            <p:commandButton value="Outros" title="Outros Cadastro" icon="ui-icon-note"/>
+				             <p:separator /> 
+				             
+				        </p:toolbarGroup>  
+				  
+				  		<p:toolbarGroup align="rigth">
+							          <p:commandButton value="Everson Lisboa" title="Usuário Logado no Sitema" icon="ui-icon-key"/>
+							          <p:commandButton value="Sair" title="Trocar de Usuário" icon="ui-icon-power" action="#"/>
+				  		</p:toolbarGroup>
+				    </p:toolbar> 
+			    </h:form>
+			</ui:insert>
+		<p:panel header="Autpo Peças On-Line" style="margin-top:1px !important">
+					<ui:insert name="conteudo"></ui:insert>
+			  	 	<ui:insert name="registro"></ui:insert>
+   		 </p:panel>  
+			
+</h:body>
+		
+</html>

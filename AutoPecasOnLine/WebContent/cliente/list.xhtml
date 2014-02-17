@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<link href="#{facesContext.externalContext.requestContextPath}/theme.css" rel="stylesheet" type="text/css" />
+</h:head> 
+<h:body> 
+	<p:dataTable emptyMessage="Sem Registro de Cliente">
+		<f:facet name="header">
+			<h:outputLabel value="Registros de Cliente" />
+		</f:facet>
+		<p:column>
+			<f:facet name="header">
+				<h:outputLabel value="Código" />
+			</f:facet>
+			<h:outputLabel value="" />
+		</p:column>
+		
+		<p:column>
+			<f:facet name="header">
+				<h:outputLabel value="CNPJ" />
+			</f:facet>
+			<h:outputLabel value="" />
+		</p:column>
+		
+		<p:column>
+			<f:facet name="header">
+				<h:outputLabel value="Razão Social" />
+			</f:facet>
+			<h:outputLabel value="" />
+		</p:column>
+		
+		<p:column>
+			<f:facet name="header">
+				<h:outputLabel value="Nome Fantasia" />
+			</f:facet>
+			<h:outputLabel value="" />
+		</p:column>
+		
+		<p:column>
+			<f:facet name="header">
+				<h:outputLabel value="UF" />
+			</f:facet>
+			<h:outputLabel value="" />
+		</p:column>
+		
+		<p:column>
+			<f:facet name="header">
+				<h:outputLabel value="E-Mail(s)" />
+			</f:facet>
+			<h:outputLabel value="" />
+		</p:column>
+		
+		<p:column>
+			<p:commandLink>
+				<h:graphicImage value="/edit-16.png" title="Atualizar Cliente"/>
+			</p:commandLink>
+			
+			<p:commandLink>
+				<h:graphicImage value="/search-16.png" title="Detalhes do Cliente"/>
+			</p:commandLink>
+		</p:column>
+	
+	</p:dataTable>
+</h:body> 
+</html>

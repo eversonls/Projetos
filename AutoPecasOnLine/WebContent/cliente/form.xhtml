@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<link href="#{facesContext.externalContext.requestContextPath}/theme.css" rel="stylesheet" type="text/css" />
+</h:head> 
+<body> 
+<center>
+		<h:panelGrid cellpadding="10" id="grid">
+				<p:outputPanel>
+							<h:panelGrid columns="4">
+								<p:outputPanel>
+									<h:outputLabel value="Código" for="txtCodigo" /><br/>
+									<p:inputText value="#{cadastroBean.cliente.in_vchcliente}" id="txtCodigo" size="4"  readonly="true" disabled="true"/>
+								</p:outputPanel>
+								<p:outputPanel>
+									<h:outputLabel value="Data Cadastro" for="txtDataCadastro" /><br/>
+									<p:inputText value="#{cadastroBean.cliente.dt_dtmcliente}" id="txtDataCadastro" size="8" readonly="true" disabled="true">
+										<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</p:inputText>
+								</p:outputPanel>
+								
+								<p:outputPanel>
+									<h:outputLabel value="CNPJ" for="txtCNPJ" /><br/>
+									<p:inputMask value="#{cadastroBean.juridica.in_vchcnpj}" id="txtCNPJ" size="15" mask="99.999.999/9999-99"/>
+								</p:outputPanel>
+								
+								<p:outputPanel>
+									<h:outputLabel value="Insc. Estadual" for="txtInsc" /><br/>
+									<p:inputMask value="#{cadastroBean.juridica.in_vchestadual}" id="txtInsc" size="8" mask="99.999.999-9"/>
+								</p:outputPanel>
+							</h:panelGrid>
+							
+							<h:panelGrid>
+								<p:outputPanel>
+									<h:outputLabel value="Razão Social" for="txtRazaoSocial" /><br/>
+									<p:inputText value="#{cadastroBean.juridica.no_vchrazao_social}" id="txtRazaoSocial" size="56"  />
+								</p:outputPanel>
+								<p:outputPanel>
+									<h:outputLabel value="Nome Fantasia" for="txtNomeFantsia" /><br/>
+									<p:inputText value="#{cadastroBean.juridica.no_vchfantasia}" id="txtNomeFantsia" size="56" />
+								</p:outputPanel>
+							</h:panelGrid>
+							
+							<h:panelGrid columns="3" id="estado">
+								<p:outputPanel>
+									<h:outputLabel value="Estado" for="cbxUF"/><br/>
+									<p:selectOneMenu id="cbxUF"  value="#{cadastroBean.estado}">
+										<f:selectItem itemLabel="Selecione" itemValue=""/>
+										<f:selectItems value="#{cadastroBean.estados}" var="uf" itemLabel="#{uf.ch_chruf}" itemValue="#{uf}" itemDescription="#{uf.no_vchestado}" />
+										<p:ajax update="cbxCidade" listener="#{cadastroBean.carregaCidades()}"  />
+									</p:selectOneMenu>
+								</p:outputPanel>
+								<p:outputPanel id="panelCidade">
+									<h:outputLabel value="Cidade" for="cbxCidade" style="margin-left:15px !important;"/><br/>
+									<p:selectOneMenu value="#{cadastroBean.cidade}" id="cbxCidade" style="margin-left:15px !important;width:230px!important;">
+										<f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+										<f:selectItems value="#{cadastroBean.cidades}" var="cidade" itemLabel="#{cidade.no_vchcidade}" itemValue="#{cidade}"/>
+									</p:selectOneMenu>
+								</p:outputPanel>
+								<p:commandButton onclick="cadastroCidade.show();" icon="ui-icon-transferthick-e-w" title="Nova Cidade" style="margin-top:17px !important;"/>						
+							</h:panelGrid>
+							
+							<h:panelGrid columns="2">
+								<p:outputPanel>
+									<h:outputLabel value="Bairro" for="cbxBairro"/><br/>
+									<p:selectOneMenu id="cbxBairro" style="width:340px!important;">
+										<f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+										<f:selectItem itemLabel="Distrito Industrial" itemValue="Distrito Industrial"/>
+									</p:selectOneMenu>
+								</p:outputPanel>
+								<p:commandButton onclick="cadastroBairro.show();" icon="ui-icon-transferthick-e-w" style="margin-top:17px !important;"/>						
+							</h:panelGrid>
+							
+							<h:panelGrid columns="2">
+								<p:outputPanel>
+									<h:outputLabel value="Logradouro" for="cbxLogradouro"/><br/>
+									<p:selectOneMenu id="cbxLogradouro" style="width:340px!important;">
+										<f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+										<f:selectItem itemLabel="Generalissimo Deodoro" itemValue="Generalissimo Deodoro"/>
+									</p:selectOneMenu>
+								</p:outputPanel>
+								<p:commandButton onclick="cadastroRua.show();" icon="ui-icon-transferthick-e-w" style="margin-top:17px !important;"/>						
+							</h:panelGrid>
+							
+							<h:panelGrid columns="3">
+								<p:outputPanel>
+									<h:outputLabel value="CEP" for="txtCEP"/><br/>
+									<p:inputMask id="txtCEP" size="6" mask="99999-999"/>
+								</p:outputPanel>
+								
+								<p:outputPanel>
+									<h:outputLabel value="Nº" for="txtNum"/><br/>
+									<p:inputText id="txtNum" size="4"/>
+								</p:outputPanel>
+								
+								<p:outputPanel>
+									<h:outputLabel value="Complemento" for="txtCompl"/><br/>
+									<p:inputText id="txtCompl" size="32"/>
+								</p:outputPanel>
+							</h:panelGrid>
+					</p:outputPanel>
+							<h:form id="formTelefone" >
+									<p:dialog widgetVar="telefone" header="Adiconar Telefone" closeOnEscape="true" resizable="false" modal="true">
+										<h:panelGrid cellpadding="5" id="checkbox">
+											<p:outputPanel>
+												<p:selectOneRadio value="#{cadastroBean.noveDigitos}">
+													<f:selectItem itemLabel="São Paulo" itemValue="true"/>
+													<f:selectItem itemLabel="Outros" itemValue="false"/>
+													<p:ajax update="checkbox"/>
+												</p:selectOneRadio>
+											</p:outputPanel>
+											<p:outputPanel >
+												<h:outputLabel value="Telefone : " />
+												<p:inputMask mask="(99)9999-9999" value="#{cadastroBean.telefone.nu_vchtelefone}" size="10" rendered="#{!cadastroBean.noveDigitos}" />
+												<p:inputMask mask="(99)99999-9999" value="#{cadastroBean.telefone.nu_vchtelefone}" size="12" rendered="#{cadastroBean.noveDigitos}" /> <!-- Caso for de são paulo true -->
+											</p:outputPanel>
+											<p:commandButton value="Adicionar" process="formTelefone" action="#{cadastroBean.addTelefone()}" style="width:100%" update="tableTelefone,checkbox" onsuccess="telefone.hide();"/>
+										</h:panelGrid>
+									</p:dialog>
+									<p:commandButton value="Adicionar Telefone" style="width:99%" onclick="telefone.show();"/>
+										<p:dataTable value="#{cadastroBean.telefones}" var="telefones" emptyMessage="Sem Telefone" style="width:99%" id="tableTelefone">
+											<f:facet name="header">
+												<h:outputLabel value="Lista de Telefones" />
+											</f:facet>
+											<p:column>
+												<f:facet name="header">
+													<h:outputLabel value="Código" />
+												</f:facet>
+												<h:outputLabel value="#{telefones.in_vchtelefone}" />
+											</p:column>
+											<p:column>
+												<f:facet name="header">
+													<h:outputLabel value="Telefone" />
+												</f:facet>
+												<h:outputLabel value="#{telefones.nu_vchtelefone}" />
+											</p:column>
+											<p:column>
+												<f:facet name="header">
+													<h:outputLabel value="Tipo" />
+												</f:facet>
+												<h:outputLabel value="#{telefones.ds_vchtipo_telefone}" />
+											</p:column>
+											<p:column>
+												<f:facet name="header">
+													<h:outputLabel value="Estado" />
+												</f:facet>
+												<h:outputLabel value="#{telefones.ch_chrtelefone}" />
+											</p:column>
+											
+											<p:column>
+												<p:commandLink title="Remover Telefone da Lista" action="#{cadastroBean.removeTelefone()}"  update="tableTelefone">
+													<h:graphicImage value="/delete.png" />
+													<f:param value="#{telefones}" name="telefones"/>
+												</p:commandLink>
+											</p:column>
+										</p:dataTable>
+							</h:form>
+							<h:form id="formEmail">
+								<p:dialog header="Adicionar Email" widgetVar="email" closable="true" closeOnEscape="true" resizable="false" modal="true">
+									<h:panelGrid  id="gridEmail">
+										<p:outputPanel>
+											<p:outputLabel value="Email :"/>
+											<p:inputText value="#{cadastroBean.email.ds_vchemail}" size="40"/>
+										</p:outputPanel>
+										<p:commandButton process="formEmail" value="Adicionar" action="#{cadastroBean.addEmail()}" style="width:100% !important" update="gridEmail,tabelaEmail,msgEmail" onsuccess="email.hide();"/>
+									</h:panelGrid>
+								</p:dialog>
+								<p:messages id="msgEmail" severity="info" autoUpdate="#{cadastroBean.autoUpdate}"/>
+								<p:commandButton value="Adicionar Email" onclick="email.show();" update="gridEmail" style="width:100%"/>
+								<p:dataTable id="tabelaEmail" value="#{cadastroBean.emails}" var="email">
+									<p:column headerText="Código">#{email.in_vchemail}</p:column>
+									<p:column headerText="Dominio">#{email.no_vchdominio}</p:column>
+									<p:column headerText="Email">#{email.ds_vchemail}</p:column>
+									<p:column>
+										<p:commandLink update="tabelaEmail" action="#{cadastroBean.removeEmail()}" process="tabelaEmail">
+											<h:graphicImage value="/delete.png" />
+											<f:param value="email" name="email"/>
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</h:form>
+					<p:outputPanel>
+						<p:commandButton value="Registrar" icon="ui-icon-disk"/>
+						<p:commandButton value="Limpar" icon="ui-icon-cancel"/>
+					</p:outputPanel>
+		</h:panelGrid>		
+					<p:dialog header="Registro de Cidade" widgetVar="cadastroCidade" modal="true" resizable="false" draggable="false" closeOnEscape="true">
+						<h:panelGrid>
+						<p:outputPanel>
+							<h:outputLabel value="Estado" for="cbxUf"/><br/>
+							<p:selectOneMenu id="cbxUf" value="#{cadastroBean.estado}" style="width:250px !important;">
+								<f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+								<f:selectItems value="#{cadastroBean.estados}" var="uf"  itemLabel="#{uf.no_vchestado}" itemValue="#{uf}" itemDescription="#{uf.no_vchestado}"/>
+							</p:selectOneMenu>
+						</p:outputPanel>
+						<p:outputPanel>	
+							<h:outputLabel value="Cidade" for="txtCidade"/><br/>
+							<p:inputText id="txtCidade" size="30"/>
+						</p:outputPanel>	
+							<p:commandButton value="Salvar" update="cbxCidade" style="width:99%"/>
+						</h:panelGrid>
+					</p:dialog>
+					
+					<p:dialog header="Registro de Bairro" widgetVar="cadastroBairro" modal="true" resizable="false" draggable="false" closeOnEscape="true">
+						<h:panelGrid>
+						<p:outputPanel>
+							<h:outputLabel value="Cidade" for="cbxCidadeBairro"/><br/>
+							<p:selectOneMenu id="cbxCidadeBairro">
+								<f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+								<f:selectItem itemLabel="Vila Bela da Santíssima Trindade" itemValue="Vila Bela da Santíssima Trindade"/>
+							</p:selectOneMenu>
+						</p:outputPanel>
+						<p:outputPanel>	
+							<h:outputLabel value="Bairro" for="txtBairro"/><br/>
+							<p:inputText id="txtBairro" size="30"/>
+						</p:outputPanel>	
+							<p:commandButton value="Salvar" update="cbxBairro" style="width:99%"/>
+						</h:panelGrid>
+					</p:dialog>
+					
+					<p:dialog header="Registro de Logradouro" widgetVar="cadastroRua" modal="true" resizable="false" draggable="false" closeOnEscape="true">
+						<h:panelGrid>
+						<p:outputPanel>
+							<h:outputLabel value="Bairro" for="cbxBairroRua"/><br/>
+							<p:selectOneMenu id="cbxBairroRua">
+								<f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+								<f:selectItem itemLabel="Vila Bela da Santíssima Trindade" itemValue="Vila Bela da Santíssima Trindade"/>
+							</p:selectOneMenu>
+						</p:outputPanel>
+						<p:outputPanel>	
+							<h:outputLabel value="Logradouro" for="txtLogradouro"/><br/>
+							<p:inputText id="txtLogradouro" size="30"/>
+						</p:outputPanel>	
+							<p:commandButton value="Salvar" update="cbxLogradouro" style="width:99%"	/>
+						</h:panelGrid>
+					</p:dialog>
+
+	</center>					
+</body> 
+</html>
