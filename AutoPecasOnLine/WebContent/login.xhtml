@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Auto Peças - Login</title>
+	<link href="#{facesContext.externalContext.requestContextPath}/theme.css" rel="stylesheet" type="text/css" />
+</h:head> 
+<h:body> 
+	<center>
+		<p:panel header="Atuo Peças - Login" styleClass="login" style="margin-top: 20% !important;width:50% !important">
+			<h:form>
+				<h:panelGrid>
+					<p:outputPanel>
+						<h:outputLabel value="Logi :" /><br/>
+						<p:inputText/>
+					</p:outputPanel>
+					<p:outputPanel>
+						<h:outputLabel value="Senha :" /><br/>
+						<p:password/>
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:commandButton value="Entrar"/>
+					</p:outputPanel>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+	</center>
+</h:body> 
+</html>
