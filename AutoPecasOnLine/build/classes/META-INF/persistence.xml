@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="AutoPecasOnLine">
+			<provider>org.hibernate.ejb.HibernatePersistence</provider>
+			<class>com.autopecas.modelo.Cliente</class>
+			<class>com.autopecas.modelo.Telefone</class>
+			<class>com.autopecas.modelo.Pessoa</class>
+			<class>com.autopecas.modelo.Juridica</class>
+			<class>com.autopecas.modelo.Cidade</class>
+			<class>com.autopecas.modelo.Estado</class>
+			<class>com.autopecas.modelo.Bairro</class>
+			<class>com.autopecas.modelo.Logradouro</class>
+			<class>com.autopecas.modelo.TipoLogradouro</class>
+			<class>com.autopecas.modelo.Endereco</class>
+			<class>com.autopecas.modelo.Email</class>
+		<properties>
+			
+			<property name="hibernate.connection.driver_class" value="net.sourceforge.jtds.jdbc.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:jtds:sqlserver://localhost:1433/dboAutoPecas" />
+			<property name="hibernate.connection.username" value="sa" />
+			<property name="hibernate.connection.password" value="everson.sys" />
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> -->
+<!-- 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" /> -->
+<!-- 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/dboAutoPecas" /> -->
+<!-- 			<property name="hibernate.connection.username" value="postgres" /> -->
+<!-- 			<property name="hibernate.connection.password" value="root" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+		</properties>
+	</persistence-unit>
+</persistence>
